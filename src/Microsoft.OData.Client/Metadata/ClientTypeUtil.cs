@@ -35,21 +35,21 @@ namespace Microsoft.OData.Client.Metadata
         {
             /// <summary>If this is not a key </summary>
             NotKey = 0,
-    
-            /// <summary> If the key property name was equal to Id</summary>
-            LowerId = 1,
+
+            /// <summary> If the key property name was equal to Id </summary>
+            PascalCaseId = 1,
+
+            /// <summary> If the key property name was equal to TypeName+Id </summary>
+            PascalCaseTypeNameId = 2,
 
             /// <summary> If the key property name was equal to ID </summary>
-            Id = 2,
-    
-            /// <summary> If the key property name was equal to TypeName+Id </summary>
-            LowerTypeNameId = 3,
+            UpperCaseId = 3,
 
             /// <summary> If the key property name was equal to TypeName+ID </summary>
-            TypeNameId = 4,
+            UpperCaseTypeNameId = 4,
 
             /// <summary> if the key property was attributed </summary>
-            AttributedKey = 5
+            AttributedKey = 5,
         }
 
         /// <summary>
@@ -675,32 +675,24 @@ namespace Microsoft.OData.Client.Metadata
             {
                 keyKind = KeyKind.AttributedKey;
             }
-            else if (propertyName.EndsWith("ID", StringComparison.Ordinal))
+            else
             {
-                string declaringTypeName = propertyInfo.DeclaringType.Name;
-                if ((propertyName.Length == (declaringTypeName.Length + 2)) && propertyName.StartsWith(declaringTypeName, StringComparison.Ordinal))
+                bool endsWithUpperCaseId = propertyName.EndsWith("ID", StringComparison.Ordinal);
+                bool endsWithPascalCaseId = propertyName.EndsWith("Id", StringComparison.Ordinal);
+
+                if (endsWithUpperCaseId || endsWithPascalCaseId)
                 {
-                    // matched "DeclaringType.Name+ID" pattern
-                    keyKind = KeyKind.TypeNameId;
-                }
-                else if (2 == propertyName.Length)
-                {
-                    // matched "ID" pattern
-                    keyKind = KeyKind.Id;
-                }
-            }
-            else if (propertyName.EndsWith("Id", StringComparison.Ordinal))
-            {
-                string declaringTypeName = propertyInfo.DeclaringType.Name;
-                if ((propertyName.Length == (declaringTypeName.Length + 2)) && propertyName.StartsWith(declaringTypeName, StringComparison.Ordinal))
-                {
-                    // matched "DeclaringType.Name+Id" pattern
-                    keyKind = KeyKind.LowerTypeNameId;
-                }
-                else if (2 == propertyName.Length)
-                {
-                    // matched "Id" pattern
-                    keyKind = KeyKind.LowerId;
+                    string declaringTypeName = propertyInfo.DeclaringType.Name;
+                    if ((propertyName.Length == (declaringTypeName.Length + 2)) && propertyName.StartsWith(declaringTypeName, StringComparison.Ordinal))
+                    {
+                        // matched "DeclaringType.Name+ID" or "DeclaringType.Name+Id" pattern
+                        keyKind = endsWithUpperCaseId ? KeyKind.UpperCaseTypeNameId : KeyKind.PascalCaseTypeNameId;
+                    }
+                    else if (2 == propertyName.Length)
+                    {
+                        // matched "ID" or "Id" pattern
+                        keyKind = endsWithUpperCaseId ? KeyKind.UpperCaseId : KeyKind.PascalCaseId;
+                    }
                 }
             }
 

@@ -73,6 +73,7 @@
     <Compile Include="Tests\ClientKeyGenerationPinningTest.cs" />
     <Compile Include="Tests\ClientPropertyTrackingTests.cs" />
     <Compile Include="Tests\ClientSingletonTest.cs" />
+    <Compile Include="Tests\ClientTypeKeyIdentificationTest.cs" />
     <Compile Include="Tests\DataServiceRequestTests.cs" />
     <Compile Include="Tests\EntityParameter\EntityParameterProxy.cs" />
     <Compile Include="Tests\EntityParameter\EntityParameterTests.cs" />
