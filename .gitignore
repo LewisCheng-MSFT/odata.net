@@ -43,6 +43,9 @@ test/FunctionalTests/Framework/AstoriaTestFramework.xml
 
 # Downloaded Nuget packages
 sln/packages/
+packages/
+.vs/
+project.lock.json
 
 # Test artifacts
 test/FunctionalTests/Tests/Data/Northwind/Northwind.csdl1.csdl
