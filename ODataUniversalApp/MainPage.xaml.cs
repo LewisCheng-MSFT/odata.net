@@ -82,10 +82,11 @@ namespace ODataUniversalApp
             ExceptionFriendly(() =>
             {
                 var airlines = WaitForResult(_context.Airlines.ExecuteAsync());
-                var airline = airlines.Single(a => a.AirlineCode == "AA");
+                var airline = airlines.First();
+                var key = airline.AirlineCode;
                 _context.DeleteObject(airline);
                 _context.SaveChangesAsync();
-                SetText("Deleted Airlines('AA').");
+                SetText("Deleted Airlines('" + key + "').");
             });
         }
 
