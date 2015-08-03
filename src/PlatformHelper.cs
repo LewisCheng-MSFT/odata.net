@@ -993,7 +993,45 @@ namespace Microsoft.OData.Edm
         internal static MethodInfo GetMethod(this Type type, string name, Type[] types)
         {
             // GetRuntimeMethod(string, Type[]) only searched public methods, so it matches Type.GetMethod(string, Type[]) behavior on other platforms.
-            return type.GetRuntimeMethod(name, types);
+            //return type.GetRuntimeMethod(name, types);
+            foreach (var method in type.GetRuntimeMethods())
+            {
+                if (method.Name != name)
+                {
+                    continue;
+                }
+
+                var parameters = method.GetParameters();
+                if (parameters.Length != types.Length)
+                {
+                    continue;
+                }
+
+                int i;
+                for (i = 0; i < types.Length; ++i)
+                {
+                    if (parameters[i].ParameterType.ContainsGenericParameters() || types[i].ContainsGenericParameters())
+                    {
+                        if (parameters[i].ParameterType != types[i])
+                        {
+                            break;
+                        }
+                    }
+                    else if (!parameters[i].ParameterType.IsAssignableFrom(types[i]))
+                    {
+                        break;
+                    }
+                }
+
+                if (i < types.Length)
+                {
+                    continue;
+                }
+
+                return method;
+            }
+
+            return null;
         }
 
         /// <summary>
