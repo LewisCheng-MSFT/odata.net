@@ -25,11 +25,15 @@ namespace Microsoft.OData.Client
         #region Private fields
 
         /// <summary>Method info for the v1 Expand method.</summary>
-        private static readonly MethodInfo expandMethodInfo = typeof(DataServiceQuery<TElement>).GetMethod("Expand", new Type[] { typeof(string) });
+        private static readonly MethodInfo expandMethodInfo =
+            MethodOf(_ => (new DataServiceQuery<TElement>(default(Expression), default(DataServiceQueryProvider)))
+                           .Expand(default(string)));
 
         /// <summary>Method info for the generic version of the Expand method</summary>
 #if DNXCORE50
-        private static readonly MethodInfo expandGenericMethodInfo = typeof(DataServiceQuery<TElement>).GetMethodWithGenericArgs("Expand", true /*isPublic*/, false /*isStatic*/, 1 /*genericArgCount*/);
+        private static readonly MethodInfo expandGenericMethodInfo =
+            GenericMethodOf(_ => (new DataServiceQuery<TElement>(default(Expression), default(DataServiceQueryProvider)))
+                                  .Expand<int>(default(Expression<Func<TElement, int>>)));
 #else
         private static readonly MethodInfo expandGenericMethodInfo = (MethodInfo)typeof(DataServiceQuery<TElement>).GetMember("Expand*").Single(m => ((MethodInfo)m).GetGenericArguments().Count() == 1);
 #endif
@@ -487,6 +491,28 @@ namespace Microsoft.OData.Client
             }
         }
 #endif
+
+        private static MethodInfo GenericMethodOf<TReturn>(Expression<Func<object, TReturn>> expression)
+        {
+            return GenericMethodOf(expression as Expression);
+        }
+
+        private static MethodInfo GenericMethodOf(Expression expression)
+        {
+            LambdaExpression lambdaExpression = expression as LambdaExpression;
+            return (lambdaExpression.Body as MethodCallExpression).Method.GetGenericMethodDefinition();
+        }
+
+        private static MethodInfo MethodOf<TReturn>(Expression<Func<object, TReturn>> expression)
+        {
+            return MethodOf(expression as Expression);
+        }
+
+        private static MethodInfo MethodOf(Expression expression)
+        {
+            LambdaExpression lambdaExpression = expression as LambdaExpression;
+            return (lambdaExpression.Body as MethodCallExpression).Method;
+        }
 
         /// <summary>
         /// Ordered DataServiceQuery which implements IOrderedQueryable.
