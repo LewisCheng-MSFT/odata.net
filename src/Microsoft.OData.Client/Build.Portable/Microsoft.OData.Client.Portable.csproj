@@ -34,20 +34,6 @@
     </XTargetOutputFile>
   </ItemGroup>
   <!-- References -->
-  <ItemGroup>
-    <ProjectReference Include="$(EnlistmentRoot)\src\Microsoft.OData.Edm\Microsoft.OData.Edm.csproj">
-      <Project>{7D921888-FE03-4C3F-80FE-2F624505461C}</Project>
-      <Name>Microsoft.OData.Edm</Name>
-    </ProjectReference>
-    <ProjectReference Include="$(EnlistmentRoot)\src\Microsoft.OData.Core\Microsoft.OData.Core.csproj">
-      <Project>{989a83cc-b864-4a75-8bf3-5eda99203a86}</Project>
-      <Name>Microsoft.OData.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="$(EnlistmentRoot)\src\Microsoft.Spatial\Microsoft.Spatial.csproj">
-      <Project>{5D921888-FE03-4C3F-40FE-2F624505461D}</Project>
-      <Name>Microsoft.Spatial</Name>
-    </ProjectReference>
-  </ItemGroup>
   <!-- Generated files -->
   <ItemGroup>
     <TextStringResource Include="Microsoft.OData.Client.txt">
@@ -901,6 +887,20 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Microsoft.OData.Core\Microsoft.OData.Core.Portable45.csproj">
+      <Project>{3a553748-bfcd-4d2c-ba62-18be5983ab45}</Project>
+      <Name>Microsoft.OData.Core.Portable45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Microsoft.OData.Edm\Microsoft.OData.Edm.Portable45.csproj">
+      <Project>{8087f595-537b-4d35-9093-c9a79a4d93c4}</Project>
+      <Name>Microsoft.OData.Edm.Portable45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Microsoft.Spatial\Microsoft.Spatial.Portable45.csproj">
+      <Project>{be8b8a4c-f717-419a-bb33-1f7b4f92d22a}</Project>
+      <Name>Microsoft.Spatial.Portable45</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(BuildExtensionsPath)\Portable.targets" />
   <PropertyGroup>

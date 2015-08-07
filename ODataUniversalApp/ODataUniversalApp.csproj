@@ -136,17 +136,17 @@
       <Project>{aed0dc9d-76e5-4145-af5e-9e2f856f4d18}</Project>
       <Name>Microsoft.OData.Client.Portable</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\Microsoft.OData.Core\Microsoft.OData.Core.csproj">
-      <Project>{989a83cc-b864-4a75-8bf3-5eda99203a86}</Project>
-      <Name>Microsoft.OData.Core</Name>
+    <ProjectReference Include="..\src\Microsoft.OData.Core\Microsoft.OData.Core.Portable45.csproj">
+      <Project>{3a553748-bfcd-4d2c-ba62-18be5983ab45}</Project>
+      <Name>Microsoft.OData.Core.Portable45</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\Microsoft.OData.Edm\Microsoft.OData.Edm.csproj">
-      <Project>{7d921888-fe03-4c3f-80fe-2f624505461c}</Project>
-      <Name>Microsoft.OData.Edm</Name>
+    <ProjectReference Include="..\src\Microsoft.OData.Edm\Microsoft.OData.Edm.Portable45.csproj">
+      <Project>{8087f595-537b-4d35-9093-c9a79a4d93c4}</Project>
+      <Name>Microsoft.OData.Edm.Portable45</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\Microsoft.Spatial\Microsoft.Spatial.csproj">
-      <Project>{5d921888-fe03-4c3f-40fe-2f624505461d}</Project>
-      <Name>Microsoft.Spatial</Name>
+    <ProjectReference Include="..\src\Microsoft.Spatial\Microsoft.Spatial.Portable45.csproj">
+      <Project>{be8b8a4c-f717-419a-bb33-1f7b4f92d22a}</Project>
+      <Name>Microsoft.Spatial.Portable45</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

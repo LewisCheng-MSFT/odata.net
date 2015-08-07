@@ -27,11 +27,11 @@
     <!-- Add your application specific runtime directives here. -->
     <Namespace Name="ODataUniversalApp" Dynamic="Required All" />
 
-    <Namespace Name="System.Collections.Generic" >
+    <!-- <Namespace Name="System.Collections.Generic" >
       <TypeInstantiation Arguments="System.String" Name="ICollection" Dynamic="Public" Serialize="Public">
         <MethodInstantiation Arguments="System.String" Name="Clear" />
       </TypeInstantiation>
-    </Namespace>
+    </Namespace> -->
 
     <Namespace Name="Microsoft.Spatial" >
       <Type Name="GeographyOperationsExtensions" Browse="Required Public" >
