@@ -243,6 +243,13 @@ namespace Microsoft.Test.OData.Query.TDD.Tests.Semantic.Functional
         }
 
         [TestMethod]
+        public void UseMultipleTypeCastAndBoundFunction()
+        {
+            var path = new ODataUriParser(HardCodedTestModel.TestModel, new Uri("http://gobbldygook/"), new Uri("http://gobbldygook/People/$/Fully.Qualified.Namespace.Employee/1/$/Fully.Qualified.Namespace.Person/Fully.Qualified.Namespace.Move")) { UrlConventions = ODataUrlConventions.KeyAsSegment }.ParsePath();
+            path.LastSegment.ShouldBeOperationSegment(HardCodedTestModel.GetMoveOverloadForPerson());
+        }
+
+        [TestMethod]
         public void UseMultipleEscapeSequencesWithCountInKeyAsSegment()
         {
             var path = new ODataUriParser(HardCodedTestModel.TestModel, new Uri("http://gobbldygook/"), new Uri("http://gobbldygook/$/$/People/1/$/$/MyDog/$/$/MyPeople/$/$/$count/$/$")) { UrlConventions = ODataUrlConventions.KeyAsSegment }.ParsePath();

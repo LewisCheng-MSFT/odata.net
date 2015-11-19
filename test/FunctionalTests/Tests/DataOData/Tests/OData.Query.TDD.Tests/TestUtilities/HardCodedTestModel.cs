@@ -86,8 +86,8 @@ namespace Microsoft.Test.OData.Query.TDD.Tests
             #endregion
 
             #region Structured Types
-            var FullyQualifiedNamespacePerson = new EdmEntityType("Fully.Qualified.Namespace", "Person", null, false, false);
-            var FullyQualifiedNamespaceEmployee = new EdmEntityType("Fully.Qualified.Namespace", "Employee", FullyQualifiedNamespacePerson, false, false);
+            var FullyQualifiedNamespacePerson = new EdmEntityType("Fully.Qualified.Namespace", "Person", null, false, true);
+            var FullyQualifiedNamespaceEmployee = new EdmEntityType("Fully.Qualified.Namespace", "Employee", FullyQualifiedNamespacePerson, false, true);
             var FullyQualifiedNamespaceManager = new EdmEntityType("Fully.Qualified.Namespace", "Manager", FullyQualifiedNamespaceEmployee, false, false);
             var FullyQualifiedNamespaceOpenEmployee = new EdmEntityType("Fully.Qualified.Namespace", "OpenEmployee", FullyQualifiedNamespaceEmployee, false, true);
             var FullyQualifiedNamespaceDog = new EdmEntityType("Fully.Qualified.Namespace", "Dog", null, false, false);
